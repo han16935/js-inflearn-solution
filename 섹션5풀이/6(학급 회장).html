@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      const classPresident = function (n, str) {
+        const candidate = ["A", "B", "C", "D", "E"];
+        const arr = [0, 0, 0, 0, 0];
+        let max = 0;
+        let maxIndex = 0;
+        for (let i = 0; i < n; i++) {
+          if (str.charAt(i) === candidate[0]) arr[0]++;
+          if (str.charAt(i) === candidate[1]) arr[1]++;
+          if (str.charAt(i) === candidate[2]) arr[2]++;
+          if (str.charAt(i) === candidate[3]) arr[3]++;
+          if (str.charAt(i) === candidate[4]) arr[4]++;
+        }
+
+        for (let j = 0; j < 5; j++) {
+          if (arr[j] > max) {
+            max = arr[j];
+            maxIndex = j;
+          }
+        }
+
+        return candidate[maxIndex];
+      };
+
+      console.log(classPresident(15, "BACBACCACCBDEDE"));
+    </script>
+  </body>
+</html>

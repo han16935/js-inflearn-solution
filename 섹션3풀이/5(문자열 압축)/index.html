@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      const compressStr = function (str) {
+        const s = str + "";
+        let answer = "";
+        let cnt = 0;
+        for (let i = 0; i < str.length; i++) {
+          if (str.charAt(i) === str.charAt(i + 1)) cnt++;
+          else {
+            answer += str.charAt(i);
+            if (cnt !== 0) answer += ++cnt;
+            cnt = 0;
+          }
+        }
+        return answer;
+      };
+
+      compressStr("KKHSSSSSSSE");
+    </script>
+  </body>
+</html>

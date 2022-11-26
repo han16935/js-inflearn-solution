@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const graduatePresent = function (n, m, arr) {
+        /*
+            n - 학생 수
+            m - 예산
+        */
+        let answer = 0;
+        arr.sort(function (a, b) {
+          return a[0] + a[1] - (b[0] + b[1]);
+        });
+        for (let i = 0; i < n; i++) {
+          let sum = 0; // 금액의 합계
+          let cnt = 0; // i번째 학생의 것이 할인되었을 때, 그에 따른 최대 학생 수
+          arr[i][0] /= 2;
+          for (let j = 0; j < n; j++) {
+            let currentStu = arr[j][0] + arr[j][1];
+            if (sum + currentStu <= m) {
+              sum += currentStu;
+              cnt++;
+            }
+          }
+          cnt > answer ? (answer = cnt) : (answer = answer);
+          arr[i][0] *= 2;
+        }
+        return answer;
+      };
+
+      console.log(
+        graduatePresent(5, 28, [
+          [6, 6],
+          [2, 2],
+          [4, 3],
+          [4, 5],
+          [10, 3],
+        ])
+      );
+    </script>
+  </body>
+</html>

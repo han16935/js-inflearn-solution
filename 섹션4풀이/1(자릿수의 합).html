@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      // 각 자릿수의 합 구하기
+      const digitsSum = function (n) {
+        let answer = 0;
+        const callBackSum = function (n) {
+          if (n < 10) {
+            answer += n;
+            return 1;
+          } else {
+            answer += n % 10;
+            callBackSum(Math.floor(n / 10));
+          }
+        };
+        callBackSum(n);
+        return answer;
+      };
+
+      const findMaxSum = function (n, arr) {
+        let answer = 0;
+        let maxDigits = 0;
+        for (const num of arr) {
+          let sum = digitsSum(num);
+          if (sum > maxDigits) {
+            maxDigits = sum;
+            answer = num;
+          }
+
+          if (maxDigits === sum) {
+            if (num > answer) answer = num;
+          }
+        }
+        return answer;
+      };
+
+      console.log(findMaxSum(7, [128, 460, 603, 40, 521, 137, 123]));
+    </script>
+  </body>
+</html>

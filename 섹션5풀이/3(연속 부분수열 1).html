@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+           1. 연속 부분수열
+                 - 부분수열 중, index가 끊기지 않고 계속 이어진 부분수열
+                 - ex) {3, 5, 6, 7, 7, 8, 10}
+                        - {3, 5, 6}, {6, 7, 7, 8}, {8, 10} 등 해당
+                        - {3, 6, 7, 10} 등은 원래 수열에서 이어져 있지 않으므로 X
+        */
+      "use strict";
+      const findSuccSequence = function (n, m, arr) {
+        /*
+            - n개의 수열 입력, 연속부분수열 중 원소의 합이 m인 것들의 개수 출력
+        */
+
+        let answer = 0;
+        for (let i = 0; i < n; i++) {
+          let sum = arr[i];
+          for (let j = i + 1; j < n; j++) {
+            if (sum === m) {
+              answer++;
+              break;
+            }
+            if (sum + arr[j] <= m) sum += arr[j];
+            else break;
+          }
+        }
+        return answer;
+      };
+
+      console.log(findSuccSequence(8, 6, [1, 2, 1, 3, 1, 1, 1, 2]));
+    </script>
+  </body>
+</html>

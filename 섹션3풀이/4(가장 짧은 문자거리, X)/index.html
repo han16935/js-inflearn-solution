@@ -9,64 +9,97 @@
   <body>
     <script>
       "use strict";
-      const shortestDis = function (str, t) {
-        // const answer = [];
-        // let flag = 0;
-        // let dis;
-        // for (let i = 0; i < str.length; i++) {
-        //   answer[i] = 0;
-        // }
-
-        // while (flag < str.length) {
-        //   dis = 0;
-        //   if (str.charAt(flag) !== t) {
-        //     dis++;
-        //   } else {
-        //     if (flag > 0 && answer[flag - 1] < answer[flag]) {
-        //     }
-        //     answer[flag] = dis;
-        //     flag++;
-        //   }
-        // }
-
+      // 자력으로 성공
+      const test = function (str, t) {
         const answer = [];
-        let dis = 100;
         for (let i = 0; i < str.length; i++) {
-          // 1. 배열 초기화
-          answer[i] = 0;
+          for (let j = i; j < str.length; j++) {
+            if (str.charAt(i) === t) {
+              answer.push(0);
+              break;
+            }
 
-          // 2. 현재 위치의 왼쪽에 있는 t를 기준으로 거리 측정(같은 철자일 경우, dis <- 0, 아니라면 dis++)
-          if (str.charAt(i) !== t) {
-            dis++;
-          } else {
-            dis = 0;
-          }
-          answer[i] = dis;
-        }
-
-        // 2.5 dis 초기화
-        dis = 100;
-
-        // 3. 현재 위치의 오른쪽 위치에 있는 t를 기준으로 거리 측정(같은 철자일 경우, dis <- 0, 아니라면 dis++)
-        for (let j = str.length - 1; j >= 0; j--) {
-          if (str.charAt(j) !== t) {
-            dis++;
-          } else {
-            dis = 0;
-          }
-
-          // 4. 2와 3에서 측정한 거리를 비교해서 더 작은 값을 answer 배열에 대입
-          if (answer[j] > dis) {
-            answer[j] = dis;
+            if (str.charAt(j) === t) {
+              let dis = j - i;
+              answer.push(dis);
+              break;
+            }
           }
         }
 
-        answer.forEach(function (v, i) {
-          console.log(v);
-        });
+        for (let i = str.length - 1; i >= 0; i--) {
+          for (let j = i; j >= 0; j--) {
+            if (str.charAt(i) === t) break;
+            if (str.charAt(j) === t) {
+              let dis = i - j;
+              if (answer[i] > dis) answer[i] = dis;
+              break;
+            }
+          }
+        }
+        return answer;
       };
 
-      shortestDis("teachermode", "e");
+      test("teachermode", "e");
+
+      // const shortestDis = function (str, t) {
+      //   // const answer = [];
+      //   // let flag = 0;
+      //   // let dis;
+      //   // for (let i = 0; i < str.length; i++) {
+      //   //   answer[i] = 0;
+      //   // }
+
+      //   // while (flag < str.length) {
+      //   //   dis = 0;
+      //   //   if (str.charAt(flag) !== t) {
+      //   //     dis++;
+      //   //   } else {
+      //   //     if (flag > 0 && answer[flag - 1] < answer[flag]) {
+      //   //     }
+      //   //     answer[flag] = dis;
+      //   //     flag++;
+      //   //   }
+      //   // }
+
+      //   const answer = [];
+      //   let dis = 100;
+      //   for (let i = 0; i < str.length; i++) {
+      //     // 1. 배열 초기화
+      //     answer[i] = 0;
+
+      //     // 2. 현재 위치의 왼쪽에 있는 t를 기준으로 거리 측정(같은 철자일 경우, dis <- 0, 아니라면 dis++)
+      //     if (str.charAt(i) !== t) {
+      //       dis++;
+      //     } else {
+      //       dis = 0;
+      //     }
+      //     answer[i] = dis;
+      //   }
+
+      //   // 2.5 dis 초기화
+      //   dis = 100;
+
+      //   // 3. 현재 위치의 오른쪽 위치에 있는 t를 기준으로 거리 측정(같은 철자일 경우, dis <- 0, 아니라면 dis++)
+      //   for (let j = str.length - 1; j >= 0; j--) {
+      //     if (str.charAt(j) !== t) {
+      //       dis++;
+      //     } else {
+      //       dis = 0;
+      //     }
+
+      //     // 4. 2와 3에서 측정한 거리를 비교해서 더 작은 값을 answer 배열에 대입
+      //     if (answer[j] > dis) {
+      //       answer[j] = dis;
+      //     }
+      //   }
+
+      //   answer.forEach(function (v, i) {
+      //     console.log(v);
+      //   });
+      // };
+
+      // shortestDis("teachermode", "e");
     </script>
   </body>
 </html>
