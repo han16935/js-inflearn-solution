@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const anagram = function (str1, str2) {
+        const originMap = new Map();
+        for (const char of str1) {
+          if (originMap.has(char)) originMap.set(char, originMap.get(char) + 1);
+          else originMap.set(char, 1);
+        }
+
+        for (const char of str2) {
+          if (!originMap.has(char)) return "NO";
+          else {
+            let val = originMap.get(char);
+            if (val - 1 === -1) return "NO";
+            else originMap.set(char, val - 1);
+          }
+        }
+        return "YES";
+      };
+
+      console.log(anagram("AbaAeCe", "baeeACA"));
+    </script>
+  </body>
+</html>

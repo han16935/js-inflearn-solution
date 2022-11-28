@@ -16,12 +16,12 @@
       const findLowerSeq = function (n, m, arr) {
         let answer = 0;
         for (let i = 0; i < n; i++) {
-          let sum = arr[i];
-          for (let j = i + 1; j < n; j++) {
-            if (sum <= m) {
-              answer++;
+          let sum = 0;
+          for (let j = i; j < n; j++) {
+            if (sum + arr[j] <= m) {
               sum += arr[j];
-            }
+              answer++;
+            } else break;
           }
         }
         return answer;

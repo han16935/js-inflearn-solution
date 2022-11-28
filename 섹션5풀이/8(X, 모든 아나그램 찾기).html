@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const findAllAnagram = function (s, t) {
+        let answer = 0;
+        const originMap = new Map();
+        // t의 철자로 map 생성
+        for (const char of t) {
+          if (!originMap.has(char)) originMap.set(char, 1);
+          else originMap.set(char, originMap.get(char) + 1);
+        }
+
+        // s의 철자로 아나그램 생성 + originMap과 비교
+        for (let i = 0; i < s.length - t.length + 1; i++) {
+          let compareMap = new Map();
+          let cnt = 0;
+          // 아나그램 생성
+          for (let j = i; j < i + t.length; j++) {
+            let char = s.charAt(j);
+            if (!compareMap.has(char)) compareMap.set(char, 1);
+            else compareMap.set(char, compareMap.get(char) + 1);
+          }
+
+          // compareMap, originMap 비교
+          for (const [key, val] of compareMap) {
+            if (!originMap.has(key)) break;
+            else {
+              if (originMap.get(key) === compareMap.get(key)) {
+                cnt++;
+              } else break;
+            }
+            if (cnt === originMap.size) answer++;
+          }
+        }
+        return answer;
+      };
+
+      findAllAnagram("bacaAacba", "abc");
+    </script>
+  </body>
+</html>
