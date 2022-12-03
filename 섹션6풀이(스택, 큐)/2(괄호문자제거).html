@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      // 입력 문자열에서 소괄호 내부에 있는 문자를 제외한 나머지 문자열 출력
+      // ')' 만날 시, '('을 만날 때까지 계속 pop해주기
+
+      const removeStr = function (word) {
+        if (!word) return 0;
+        let answer = "";
+        const stack = [];
+        for (const str of word) {
+          if (str === ")") {
+            let popped;
+            while (popped !== "(") {
+              popped = stack.pop();
+            }
+          } else stack.push(str);
+        }
+        stack.forEach(function (v, i) {
+          answer += v;
+        });
+        return answer;
+      };
+
+      console.log(removeStr("(A(BC)D)EF(G(H)(IJ)K)LM(N)"));
+    </script>
+  </body>
+</html>

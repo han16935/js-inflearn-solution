@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      /*
+         1. row, col로 현재 크레인으로 가져오는 숫자 파악
+             - 0이면 안 되므로, 반복문을 통해 원하는 위치 파악
+             - 찾은 board의 위치는 0으로 만들기
+
+         2. stack의 length, length - 1을 비교해 같다면 2번 pop한 뒤, answer+=2 해주기
+      */
+      let board = [
+        [0, 0, 0, 0, 0],
+        [2, 0, 1, 0, 3],
+        [2, 2, 5, 0, 1],
+        [4, 2, 4, 4, 2],
+        [4, 5, 1, 3, 1],
+      ];
+      let moves = [1, 1, 1, 1, 1];
+      const crane = function (board, moves) {
+        if (!board || !moves) return 0;
+        let answer = 0;
+        const stack = [];
+        for (const move of moves) {
+          let col = move - 1;
+          let currentBoard;
+          for (let i = 0; i < board.length; i++) {
+            currentBoard = board[i][col];
+            if (currentBoard !== 0) {
+              board[i][col] = 0;
+              break;
+            }
+          }
+          if (currentBoard === 0) continue;
+          stack.push(currentBoard);
+          if (
+            stack.length > 0 &&
+            stack[stack.length - 1] === stack[stack.length - 2]
+          ) {
+            stack.pop();
+            stack.pop();
+            answer += 2;
+          }
+        }
+        return answer;
+      };
+
+      console.log(crane(board, moves));
+    </script>
+  </body>
+</html>

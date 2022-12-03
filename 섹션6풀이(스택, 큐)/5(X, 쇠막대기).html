@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      const solution = function (word) {
+        /*
+           5. 쇠막대기
+             - 인자 순회하면서 '(' 만나면 push
+             - ')' 만날 경우에는 2가지 경우로 갈림
+                 - 1. stack.pop()
+                 - 원래 인자에서 ')' 앞이 '(' 일 경우
+                    - 레이저의 끝점인 경우, stack의 길이만큼 answer++
+
+                 - 원래 인자에서 ')' 앞이 ')' 일 경우
+                    - 막대기의 끝인 경우, answer++
+                      - 왜? 막대기가 끝나면서 1조각이 더 생겼으니까
+
+        */
+        if (!word) return 0;
+        let answer = 0;
+        const stack = [];
+        for (let i = 0; i < word.length; i++) {
+          let char = word.charAt(i);
+          if (char === "(") stack.push(char);
+          else {
+            stack.pop();
+            if (word.charAt(i - 1) === "(") answer += stack.length;
+            else answer++;
+          }
+        }
+        return answer;
+      };
+      console.log(solution("(((()(()()))(())()))(()())"));
+    </script>
+  </body>
+</html>

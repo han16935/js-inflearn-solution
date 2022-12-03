@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+
+      const postfix = function (word) {
+        const stack = [];
+        word.split("").forEach(function (v, i) {
+          let num = Number(v);
+          if (!isNaN(num)) stack.push(num);
+          else {
+            let char = word.charAt(i);
+            let firstPop = stack.pop();
+            let secondPop = stack.pop();
+            if (char === "+") stack.push(secondPop + firstPop);
+            if (char === "-") stack.push(secondPop - firstPop);
+            if (char === "*") stack.push(secondPop * firstPop);
+            if (char === "/") stack.push(secondPop / firstPop);
+          }
+        });
+        return stack[0];
+      };
+
+      console.log(postfix("352+*9-"));
+    </script>
+  </body>
+</html>
