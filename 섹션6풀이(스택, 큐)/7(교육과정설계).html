@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      const solution = function (essential, allLesson) {
+        if (!essential || !allLesson) return "Invalid";
+        let cnt = 0;
+        for (const lesson of allLesson) {
+          if (lesson === essential.charAt(cnt)) cnt++;
+          if (cnt === essential.length) return "YES";
+        }
+        return "NO";
+      };
+
+      console.log(solution("CBA", "CBACBA"));
+    </script>
+  </body>
+</html>
