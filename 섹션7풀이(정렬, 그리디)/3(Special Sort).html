@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      const specialSort = function (arr) {
+        const minusArr = [];
+        const plusArr = [];
+        for (const num of arr) {
+          if (num < 0) minusArr.push(num);
+          else plusArr.push(num);
+        }
+        const answer = [...minusArr, ...plusArr];
+        return answer;
+      };
+
+      specialSort([1, 2, 3, -3, -2, 5, 6, -6]);
+    </script>
+  </body>
+</html>
