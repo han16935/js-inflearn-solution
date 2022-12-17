@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      const solution = function (n, height) {
+        const result = [];
+        const originHeight = [...height];
+        originHeight.sort((a, b) => a - b);
+        originHeight.forEach((v, i) => {
+          if (v !== height[i]) result.push(i + 1);
+        });
+        return result;
+      };
+
+      console.log(solution(6, [120, 130, 150, 150, 130, 150]));
+    </script>
+  </body>
+</html>

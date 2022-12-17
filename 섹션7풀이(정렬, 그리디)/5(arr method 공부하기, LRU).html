@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      const lru = function (s, n, task) {
+        if (!s || !n || !task) return 0;
+        let length = s;
+        const result = Array.from({ length: length }, (v, i) => (v = 0));
+        task.forEach((task, i) => {
+          // 1. Cache Miss
+          if (!result.includes(task)) {
+            result.unshift(task);
+            result.pop();
+          }
+
+          // 2. Cache Hit
+          else {
+            let index = result.indexOf(task);
+            result.unshift(task);
+            result.splice(index + 1, 1);
+          }
+        });
+        return result;
+      };
+      console.log(lru(5, 9, [1, 2, 3, 2, 6, 2, 3, 5, 7]));
+    </script>
+  </body>
+</html>

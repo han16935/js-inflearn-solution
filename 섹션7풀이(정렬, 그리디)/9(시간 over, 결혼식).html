@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      const marriage = function (n, times) {
+        let answer = 0;
+        const sortedTimes = [...times].sort((a, b) => {
+          if (a[1] === b[1]) return a[0] - b[0];
+          else return a[1] - b[1];
+        });
+        for (let i = 0; i < sortedTimes.length; i++) {
+          let result = 1;
+          let endTime = sortedTimes[i][1];
+          for (let j = i + 1; j < sortedTimes.length; j++) {
+            let startTime = sortedTimes[j][0];
+            if (startTime < endTime) result++;
+          }
+          answer = Math.max(answer, result);
+        }
+        return answer;
+      };
+
+      console.log(
+        marriage(5, [
+          [14, 18],
+          [12, 15],
+          [15, 20],
+          [20, 30],
+          [5, 14],
+        ])
+      );
+    </script>
+  </body>
+</html>
