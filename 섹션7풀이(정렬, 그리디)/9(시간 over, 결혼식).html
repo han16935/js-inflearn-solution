@@ -8,22 +8,96 @@
   </head>
   <body>
     <script>
+      /*
+       1. 정렬(본인의 풀이)
+         
+         i) 지속 시간 기준
+              12 15
+              14 18 
+              15 20            
+              5  14 
+              20 30
+
+        ii) 퇴장 시간 기준(v, 만약 같다면 입장 시간 기준 정렬) (O)
+              5 14 v                             
+              12 15 v
+              14 18                
+              15 20
+              20 30
+
+
+        1. 분리(강의 풀이)
+           입력된 시간을 s, e로 분리
+             ex) const time = [
+               [14, 's'],
+               [18, 'e'],
+               [12, 's'],
+               [15, 'e'],
+               ...  
+             ]
+             
+         2. 정렬
+            time 배열의 요소를 시간 기준 오름차순 정렬
+               - 이 때, 시간이 같고 's', 'e'가 다를 경우에는 'e' 먼저 정렬되도록
+                    - 왜 'e' 먼저인가? : 'e' 시간에 그 사람은 이미 없기 때문, 만약 s 먼저 정렬시키면 인원수가 달라짐
+              ex)
+                [
+                  [12, 's'],
+                  [14, 's'],
+                  [15, 'e'],
+                  [15, 's'],
+                  [18, 'e'],
+                  ...
+                ]
+
+          3. Count
+             정렬된 배열을 돌면서, arr[i][1]이 's'라면 ++, 'e'라면 --
+             이 때, answer과 비교해서 더 크다면 answer 교체      
+                    
+      */
+
       "use strict";
+      // const marriage = function (n, times) {
+      //   let answer = 0;
+      //   const sortedTimes = [...times].sort((a, b) => {
+      //     if (a[1] === b[1]) return a[0] - b[0];
+      //     else return a[1] - b[1];
+      //   });
+      //   for (let i = 0; i < sortedTimes.length; i++) {
+      //     let result = 1;
+      //     let endTime = sortedTimes[i][1];
+      //     for (let j = i + 1; j < sortedTimes.length; j++) {
+      //       let startTime = sortedTimes[j][0];
+      //       if (startTime < endTime) result++;
+      //     }
+      //     answer = Math.max(answer, result);
+      //   }
+      //   return answer;
+      // };
+
       const marriage = function (n, times) {
-        let answer = 0;
-        const sortedTimes = [...times].sort((a, b) => {
-          if (a[1] === b[1]) return a[0] - b[0];
-          else return a[1] - b[1];
+        // 1. 분리
+        const separatedTimes = [];
+        times.forEach((time, i) => {
+          separatedTimes.push([time[0], "s"]);
+          separatedTimes.push([time[1], "e"]);
         });
-        for (let i = 0; i < sortedTimes.length; i++) {
-          let result = 1;
-          let endTime = sortedTimes[i][1];
-          for (let j = i + 1; j < sortedTimes.length; j++) {
-            let startTime = sortedTimes[j][0];
-            if (startTime < endTime) result++;
-          }
-          answer = Math.max(answer, result);
-        }
+
+        // 2. 정렬
+        const sortedTimes = [...separatedTimes].sort((a, b) => {
+          if (a[0] !== b[0]) return a[0] - b[0];
+          else return a[1].charCodeAt() - b[1].charCodeAt();
+        });
+        // 3. Count
+        let answer = 0;
+        let count = 0;
+        sortedTimes.forEach((v, i) => {
+          let type = v[1];
+          if (type === "s") count++;
+          if (type === "e") count--;
+          answer = Math.max(answer, count);
+        });
+
         return answer;
       };
 
