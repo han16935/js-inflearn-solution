@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      "use strict";
+      const binaryNum = function (n) {
+        let reversedAnswer = "";
+        (function callbackBinaryNum(n) {
+          if (n >= 1) {
+            let digit = n % 2;
+            reversedAnswer += digit;
+            callbackBinaryNum(Math.floor(n / 2));
+          } else return 1;
+        })(n);
+        const answer = reversedAnswer.split("").reverse().join("");
+        return answer;
+      };
+      console.log(binaryNum(11));
+    </script>
+  </body>
+</html>
